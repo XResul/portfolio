@@ -28,23 +28,26 @@ export default function Hero() {
 
   useEffect(() => {
     const currentRole = roles[roleIndex];
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        // Yazıyı yaz
-        setText(currentRole.substring(0, text.length + 1));
-        if (text === currentRole) {
-          // Yazı bitti, 2 saniye bekle ve silmeye başla
-          setTimeout(() => setIsDeleting(true), 2000);
+    const timeout = setTimeout(
+      () => {
+        if (!isDeleting) {
+          // Yazıyı yaz
+          setText(currentRole.substring(0, text.length + 1));
+          if (text === currentRole) {
+            // Yazı bitti, 2 saniye bekle ve silmeye başla
+            setTimeout(() => setIsDeleting(true), 2000);
+          }
+        } else {
+          // Yazıyı sil
+          setText(currentRole.substring(0, text.length - 1));
+          if (text === "") {
+            setIsDeleting(false);
+            setRoleIndex((prev) => (prev + 1) % roles.length);
+          }
         }
-      } else {
-        // Yazıyı sil
-        setText(currentRole.substring(0, text.length - 1));
-        if (text === "") {
-          setIsDeleting(false);
-          setRoleIndex((prev) => (prev + 1) % roles.length);
-        }
-      }
-    }, isDeleting ? 50 : 100);
+      },
+      isDeleting ? 50 : 100,
+    );
 
     return () => clearTimeout(timeout);
   }, [text, isDeleting, roleIndex]);
@@ -61,21 +64,21 @@ export default function Hero() {
       />
 
       {/* Koyu Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-slate-900/90" />
+      <div className="absolute inset-0 bg-linear-to-r from-slate-900/90 via-slate-900/50 to-slate-900/90" />
 
       {/* İçerik - Yan Yana Layout */}
       <div className="relative z-10 px-4 w-full max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20">
           {/* Sol Taraf - Profil Resmi (Yuvarlak & Büyük) */}
           <div
-            className={`relative w-72 h-72 md:w-[500px] md:h-[500px] flex-shrink-0 transition-all duration-1000 ${
+            className={`relative w-72 h-72 md:w-125 md:h-125 shrink-0 transition-all duration-1000 ${
               imageLoaded
                 ? "opacity-100 scale-100 rotate-0"
                 : "opacity-0 scale-50 rotate-12"
             }`}
           >
             {/* Dış çerçeve - Gradient border + dönen animasyon */}
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-teal-500 to-cyan-600 rounded-full animate-spin-slow" />
+            <div className="absolute inset-0 bg-linear-to-br from-cyan-400 via-teal-500 to-cyan-600 rounded-full animate-spin-slow" />
             {/* İç resim */}
             <div className="absolute inset-2 rounded-full overflow-hidden">
               {/* Arka plan - Hero ile aynı + blur */}
@@ -91,8 +94,10 @@ export default function Hero() {
               <div
                 className="absolute inset-0 z-10"
                 style={{
-                  maskImage: "radial-gradient(circle, black 50%, transparent 80%)",
-                  WebkitMaskImage: "radial-gradient(circle, black 50%, transparent 80%)",
+                  maskImage:
+                    "radial-gradient(circle, black 50%, transparent 80%)",
+                  WebkitMaskImage:
+                    "radial-gradient(circle, black 50%, transparent 80%)",
                 }}
               >
                 <Image
@@ -111,15 +116,19 @@ export default function Hero() {
           <div className="text-center md:text-left">
             <p
               className={`text-xl text-cyan-300 mb-2 tracking-widest uppercase transition-all duration-700 delay-300 ${
-                imageLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                imageLoaded
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
             >
               Merhaba, Ben
             </p>
 
             <h1
-              className={`text-5xl md:text-7xl font-bold mb-4 drop-shadow-lg bg-gradient-to-r from-cyan-200 via-white to-teal-200 bg-clip-text text-transparent transition-all duration-700 delay-500 ${
-                imageLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              className={`text-5xl md:text-7xl font-bold mb-4 drop-shadow-lg bg-linear-to-r from-cyan-200 via-white to-teal-200 bg-clip-text text-transparent transition-all duration-700 delay-500 ${
+                imageLoaded
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
             >
               Resul
@@ -127,7 +136,9 @@ export default function Hero() {
 
             <p
               className={`text-2xl md:text-3xl text-cyan-100 mb-8 h-10 transition-all duration-700 delay-700 ${
-                imageLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                imageLoaded
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
             >
               {text}
@@ -136,15 +147,17 @@ export default function Hero() {
 
             <div
               className={`flex gap-6 justify-center md:justify-start flex-wrap transition-all duration-700 delay-1000 ${
-                imageLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                imageLoaded
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
             >
               <a
                 href="#projects"
-                className="group relative px-10 py-4 bg-gradient-to-r from-cyan-600 to-teal-600 rounded-xl text-lg font-semibold shadow-xl shadow-cyan-600/40 hover:shadow-cyan-500/60 transition-all hover:scale-105 overflow-hidden"
+                className="group relative px-10 py-4 bg-linear-to-r from-cyan-600 to-teal-600 rounded-xl text-lg font-semibold shadow-xl shadow-cyan-600/40 hover:shadow-cyan-500/60 transition-all hover:scale-105 overflow-hidden"
               >
                 <span className="relative z-10">Projelerim</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-linear-to-r from-cyan-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
               <a
                 href="#contact"
