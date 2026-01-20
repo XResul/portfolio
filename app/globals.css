@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Su Temalı Renk Paleti */
+  --background: #0f172a;       /* Koyu lacivert */
+  --foreground: #e0f2fe;       /* Açık cyan */
+  --primary: #06b6d4;          /* Cyan */
+  --secondary: #14b8a6;        /* Teal */
+  --accent: #22d3ee;           /* Parlak cyan */
 }
 
 @theme inline {
@@ -12,15 +16,13 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Smooth scroll davranışı */
+html {
+  scroll-behavior: smooth;
 }
